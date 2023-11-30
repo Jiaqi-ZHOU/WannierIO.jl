@@ -68,6 +68,7 @@ function read_qe_xml(filename::AbstractString)
 
     band_structure = findfirst("band_structure", output)
     n_kpts = parse(Int, findfirst("nks", band_structure).content)
+    n_electrons = parse(Float64, findfirst("nelec", band_structure).content)
     lsda = parse(Bool, findfirst("lsda", band_structure).content)
     # noncolin = parse(Bool, findfirst("noncolin", band_structure).content)
     spinorbit = parse(Bool, findfirst("spinorbit", band_structure).content)
@@ -120,7 +121,7 @@ function read_qe_xml(filename::AbstractString)
     recip_lattice = Mat3(recip_lattice)
 
     results = (;
-        lattice, atom_positions, atom_labels, recip_lattice, kpoints, fermi_energy, alat
+        lattice, atom_positions, atom_labels, recip_lattice, kpoints, fermi_energy, alat, n_electrons
     )
     if lsda && !spinorbit
         return (; results..., eigenvalues_up, eigenvalues_dn)
