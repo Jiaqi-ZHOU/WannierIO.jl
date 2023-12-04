@@ -78,7 +78,7 @@ function read_w90_tbdat(filename::AbstractString)
         end
 
         @info "Reading tb.dat file" filename header n_wann n_Rvecs
-        return (; lattice, Rvectors, Rdegens, H, r_x, r_y, r_z, header)
+        return (; lattice, Rvectors, Rdegens, H, r_x, r_y, r_z, header, n_wann)
     end
 end
 
